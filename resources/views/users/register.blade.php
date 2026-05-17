@@ -68,7 +68,40 @@
             error: function () {}
         });
     }
+
+    function toggleOtpModal() {
+        const modal = document.getElementById('otpModal');
+        if(modal) modal.classList.toggle('active');
+    }
+
+    $(document).ready(function() {
+        @if(session('registration_otp_sent_to'))
+            toggleOtpModal();
+        @endif
+    });
     </script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
 </head>
 <body>
     <div class="login-page">
@@ -119,5 +152,30 @@
             </div>
         </div>
     </div>
+
+    <!-- OTP Verification Modal -->
+    @if(session('registration_otp_sent_to'))
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <div class="flex-between mb-12" style="margin-bottom: 20px;">
+                <h3 style="color: var(--text-main);">Verify Email Address</h3>
+                <button onclick="toggleOtpModal()" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--text-muted);">&times;</button>
+            </div>
+            
+            <form name="verifyOtp" method="post" action="/users/verify-registration-otp">
+                @csrf
+                <div class="form-group">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">An OTP has been sent to <strong>{{ session('registration_otp_sent_to') }}</strong>. It is valid for 15 minutes.</p>
+                    <input type="text" name="otp" placeholder="Enter 6-digit OTP" autocomplete="off" class="form-control" required maxlength="6">
+                </div>
+                
+                <div class="flex-between" style="margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="toggleOtpModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="verify">Verify & Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endif
 </body>
 </html>

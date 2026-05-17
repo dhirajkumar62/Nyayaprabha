@@ -166,7 +166,8 @@
                             <button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-save" style="margin-right: 8px;"></i> Save Changes</button>
                         </div>
                     </form>
-                    </form>
+                </div>
+
                 </div>
             </main>
         </div>

@@ -1,116 +1,73 @@
-<div class="sidebar-menu-wrapper" style="padding: 24px 0;">
-    <div class="user-profile" style="text-align: center; margin-bottom: 30px; padding: 0 24px;">
-        <img src="https://img.icons8.com/glyph-neue/64/administrator-male.png" width="80" style="border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 16px;">
-        <h4 style="font-size: 1.1rem; color: var(--text-main); font-weight: 700;">Administrator</h4>
-        <p style="font-size: 0.875rem; color: var(--text-muted);">Women Safety Portal</p>
+<div class="sidebar-menu-wrapper" style="padding: 30px 0;">
+    <div class="user-profile" style="text-align: center; margin-bottom: 40px; padding: 0 24px;">
+        <img src="https://img.icons8.com/glyph-neue/64/administrator-male.png" width="70" style="border-radius: 50%; border: 3px solid var(--primary-light); margin-bottom: 12px; padding: 4px; background: white; box-shadow: var(--shadow-sm);">
+        <h4 style="font-size: 1.05rem; color: var(--text-main); font-weight: 700; margin-bottom: 2px;">Administrator</h4>
+        <p style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Women Safety Portal</p>
     </div>
 
-    <ul class="sidebar-menu">
-        <li>
-            <a href="/admin/dashboard">
-                <i class="fa fa-th-large"></i>
-                <span>Dashboard Overview</span>
+    <ul class="sidebar-menu" style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/dashboard" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-th-large" style="margin-right: 16px; font-size: 1.1rem; color: var(--primary); opacity: 0.8; width: 20px; text-align: center;"></i>
+                <span>Dashboard</span>
             </a>
         </li>
 
-        <li style="padding: 24px 24px 8px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Emergency Management</li>
-        <li>
-            <a href="#" style="color: var(--accent); font-weight: 600;">
-                <i class="fa fa-exclamation-triangle"></i>
-                <span>Active SOS Alerts</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-map-marked-alt"></i>
-                <span>Unsafe Areas Tagging</span>
-            </a>
-        </li>
-        <li>
-            <a href="/admin/helplines">
-                <i class="fa fa-phone-alt"></i>
-                <span>Helpline Management</span>
-            </a>
-        </li>
-
-        <li style="padding: 24px 24px 8px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Complaint System</li>
-        <li>
-            <a href="/admin/notprocess-complaint">
-                <i class="fa fa-file-signature"></i>
+        <li style="padding: 28px 24px 10px; font-size: 0.7rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Emergency & Complaints</li>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/notprocess-complaint" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-file-signature" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
                 <span>New Complaints</span>
             </a>
         </li>
-        <li>
-            <a href="/admin/inprocess-complaint">
-                <i class="fa fa-spinner"></i>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/inprocess-complaint" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-spinner" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
                 <span>Pending Cases</span>
             </a>
         </li>
-        <li>
-            <a href="/admin/closed-complaint">
-                <i class="fa fa-check-circle"></i>
-                <span>Resolved Complaints</span>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/closed-complaint" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-check-circle" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>Resolved</span>
+            </a>
+        </li>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/helplines" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-phone-alt" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>Helplines</span>
             </a>
         </li>
 
-        <li style="padding: 24px 24px 8px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Users & Authorities</li>
-        <li>
-            <a href="/admin/manage-users">
-                <i class="fa fa-users"></i>
-                <span>User Management</span>
+        <li style="padding: 28px 24px 10px; font-size: 0.7rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Management</li>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/manage-users" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-users" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>Users</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-user-shield"></i>
-                <span>Officer Management</span>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/category" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-tags" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>Categories</span>
             </a>
         </li>
-
-        <li style="padding: 24px 24px 8px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Reports & Analytics</li>
-        <li>
-            <a href="#">
-                <i class="fa fa-chart-line"></i>
-                <span>Analytics & Reports</span>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/state" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-map-marker-alt" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>States</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-star"></i>
-                <span>Feedback & Reviews</span>
-            </a>
-        </li>
-
-        <li style="padding: 24px 24px 8px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">System Settings</li>
-        <li>
-            <a href="/admin/category">
-                <i class="fa fa-folder"></i>
-                <span>Complaint Categories</span>
-            </a>
-        </li>
-        <li>
-            <a href="/admin/state">
-                <i class="fa fa-map"></i>
-                <span>State Management</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-bell"></i>
-                <span>Notifications</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-file-alt"></i>
-                <span>Content Management</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-                <span>Platform Settings</span>
+        <li style="margin-bottom: 4px;">
+            <a href="/admin/user-logs" style="display: flex; align-items: center; padding: 12px 24px; color: var(--text-main); font-weight: 500; text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 16px; transition: var(--transition);">
+                <i class="fa fa-history" style="margin-right: 16px; font-size: 1.1rem; color: var(--text-muted); width: 20px; text-align: center;"></i>
+                <span>User Logs</span>
             </a>
         </li>
     </ul>
+    
+    <style>
+        .sidebar-menu li a:hover { background: var(--primary-light); color: var(--primary) !important; }
+        .sidebar-menu li a:hover i { color: var(--primary) !important; opacity: 1 !important; }
+    </style>
 </div>

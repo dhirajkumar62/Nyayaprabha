@@ -75,18 +75,22 @@
         }
     </style>
     <script type="text/javascript">
-        function valid() {
-            if(document.forgot.password.value != document.forgot.confirmpassword.value) {
-                alert("Password and Confirm Password Field do not match!!");
-                document.forgot.confirmpassword.focus();
-                return false;
-            }
-            return true;
-        }
+        // Password validation removed as it is now in the OTP modal
         
         function toggleModal() {
             const modal = document.getElementById('forgotModal');
             modal.classList.toggle('active');
+        }
+
+        function toggleOtpModal() {
+            const modal = document.getElementById('otpModal');
+            if(modal) modal.classList.toggle('active');
+        }
+
+        window.onload = function() {
+            @if(session('otp_sent_to'))
+                toggleOtpModal();
+            @endif
         }
     </script>
 </head>
@@ -151,22 +155,42 @@
                 <div class="form-group">
                     <input type="email" name="email" placeholder="Email Address" autocomplete="off" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="contact" placeholder="Contact Number" autocomplete="off" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="New Password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" required>
-                </div>
                 
                 <div class="flex-between" style="margin-top: 24px;">
                     <button type="button" class="btn btn-secondary" onclick="toggleModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary" name="change" onclick="return valid();">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="change">Send OTP</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- OTP Verification Modal -->
+    @if(session('otp_sent_to'))
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <div class="flex-between mb-12" style="margin-bottom: 20px;">
+                <h3 style="color: var(--text-main);">Verify OTP & Reset Password</h3>
+                <button onclick="toggleOtpModal()" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--text-muted);">&times;</button>
+            </div>
+            
+            <form name="verifyOtp" method="post" action="/users/verify-otp">
+                @csrf
+                <input type="hidden" name="email" value="{{ session('otp_sent_to') }}">
+                <div class="form-group">
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">An OTP has been sent to {{ session('otp_sent_to') }}. It is valid for 10 minutes.</p>
+                    <input type="text" name="otp" placeholder="Enter 6-digit OTP" autocomplete="off" class="form-control" required maxlength="6">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="New Password" id="new_password" name="new_password" required>
+                </div>
+                
+                <div class="flex-between" style="margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="toggleOtpModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="verify">Reset Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endif
 </body>
 </html>

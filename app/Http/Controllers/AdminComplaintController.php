@@ -14,7 +14,7 @@ class AdminComplaintController extends Controller
         $complaints = DB::table('tblcomplaints')
             ->select('tblcomplaints.*', 'users.fullName as name')
             ->join('users', 'users.id', '=', 'tblcomplaints.userId')
-            ->whereNull('status')
+            ->whereNull('tblcomplaints.status')
             ->get();
         return view('admin.notprocess-complaint', compact('complaints'));
     }
@@ -25,7 +25,7 @@ class AdminComplaintController extends Controller
         $complaints = DB::table('tblcomplaints')
             ->select('tblcomplaints.*', 'users.fullName as name')
             ->join('users', 'users.id', '=', 'tblcomplaints.userId')
-            ->where('status', 'in Process')
+            ->where('tblcomplaints.status', 'in Process')
             ->get();
         return view('admin.inprocess-complaint', compact('complaints'));
     }
@@ -36,7 +36,7 @@ class AdminComplaintController extends Controller
         $complaints = DB::table('tblcomplaints')
             ->select('tblcomplaints.*', 'users.fullName as name')
             ->join('users', 'users.id', '=', 'tblcomplaints.userId')
-            ->where('status', 'closed')
+            ->where('tblcomplaints.status', 'closed')
             ->get();
         return view('admin.closed-complaint', compact('complaints'));
     }

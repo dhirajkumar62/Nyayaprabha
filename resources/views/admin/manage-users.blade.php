@@ -36,6 +36,12 @@
                     <h2><i class="fa fa-users" style="margin-right: 10px; color: var(--primary);"></i> Manage Users</h2>
                 </div>
 
+                @if(session('msg'))
+                    <div style="background: rgba(16, 185, 129, 0.1); color: #10B981; padding: 10px 16px; border-radius: 6px; margin-bottom: 20px; font-weight: 500;">
+                        <i class="fa fa-check-circle" style="margin-right: 8px;"></i> {{ session('msg') }}
+                    </div>
+                @endif
+
                 <div class="table-container">
                     <table>
                         <thead>
@@ -45,6 +51,7 @@
                                 <th>Email</th>
                                 <th>Contact No</th>
                                 <th>Reg. Date</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +62,11 @@
                                 <td>{{ $row->userEmail }}</td>
                                 <td>{{ $row->contactNo }}</td>
                                 <td style="color: var(--text-muted);">{{ $row->regDate }}</td>
+                                <td>
+                                    <a href="/admin/users/delete/{{ $row->id }}" onclick="return confirm('Are you sure you want to delete this user?');" class="btn btn-secondary" style="color: var(--error) !important; padding: 6px 12px; font-size: 0.85rem;">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

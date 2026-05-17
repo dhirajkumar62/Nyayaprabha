@@ -201,10 +201,57 @@
                         <h2>Your Safety is Our Priority</h2>
                         <p>Access emergency services, register complaints, and stay protected.</p>
                     </div>
-                    <button class="sos-btn" onclick="alert('Emergency SOS Activated! Your live location has been shared with emergency contacts and the nearest police station.')">
-                        <i class="fa fa-exclamation-triangle"></i> Emergency SOS
-                    </button>
+                    <form id="sosForm" action="/users/sos/trigger" method="POST">
+                        @csrf
+                        <input type="hidden" name="latitude" id="sos_lat" value="">
+                        <input type="hidden" name="longitude" id="sos_lng" value="">
+                        <button type="button" class="sos-btn" onclick="triggerSos()">
+                            <i class="fa fa-exclamation-triangle"></i> Emergency SOS
+                        </button>
+                    </form>
+                    
+                    <script>
+                        function triggerSos() {
+                            if (confirm('WARNING: This will instantly send emergency SMS and Email alerts to all your registered contacts. Are you sure you want to trigger the SOS?')) {
+                                const btn = document.querySelector('.sos-btn');
+                                btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Locating...';
+                                btn.disabled = true;
+
+                                if ("geolocation" in navigator) {
+                                    navigator.geolocation.getCurrentPosition(
+                                        function(position) {
+                                            // Success: add location and submit
+                                            document.getElementById('sos_lat').value = position.coords.latitude;
+                                            document.getElementById('sos_lng').value = position.coords.longitude;
+                                            document.getElementById('sosForm').submit();
+                                        },
+                                        function(error) {
+                                            // Error/Denied: submit without location
+                                            alert("Could not get your precise location, but the SOS will still be sent.");
+                                            document.getElementById('sosForm').submit();
+                                        },
+                                        { timeout: 10000 } // wait max 10 seconds for location
+                                    );
+                                } else {
+                                    // Geolocation not supported, submit anyway
+                                    document.getElementById('sosForm').submit();
+                                }
+                            }
+                        }
+                    </script>
                 </div>
+                
+                @if(session('sos_success'))
+                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10B981; color: #10B981; padding: 16px; border-radius: 4px; margin-bottom: 24px;">
+                        <i class="fa fa-check-circle" style="margin-right: 8px;"></i> <strong>SOS Dispatched:</strong> {{ session('sos_success') }}
+                    </div>
+                @endif
+                
+                @if(session('sos_error'))
+                    <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; color: #EF4444; padding: 16px; border-radius: 4px; margin-bottom: 24px;">
+                        <i class="fa fa-exclamation-circle" style="margin-right: 8px;"></i> <strong>SOS Alert Issue:</strong> {{ session('sos_error') }}
+                    </div>
+                @endif
                 
                 <div class="feature-grid">
                     <!-- Feature 1 -->

@@ -43,6 +43,12 @@
             </a>
         </li>
         <li>
+            <a href="/users/emergency-contacts">
+                <i class="fa fa-heartbeat"></i>
+                <span>Emergency Contacts</span>
+            </a>
+        </li>
+        <li>
             <a href="/users/profile">
                 <i class="fa fa-user-cog"></i>
                 <span>Profile Settings</span>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Hash;
+
 class AdminController extends Controller
 {
     public function showLoginForm()
@@ -16,14 +18,31 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $username = $request->input('username');
-        $password = md5($request->input('password'));
+        $plainPassword = $request->input('password');
 
-        $admin = DB::table('admin')
-            ->where('username', $username)
-            ->where('password', $password)
-            ->first();
+        $admin = DB::table('admin')->where('username', $username)->first();
+
+        $authenticated = false;
 
         if ($admin) {
+            if (md5($plainPassword) === $admin->password) {
+                $authenticated = true;
+                // Upgrade hash
+                DB::table('admin')->where('id', $admin->id)->update([
+                    'password' => Hash::make($plainPassword)
+                ]);
+            } else {
+                try {
+                    if (Hash::check($plainPassword, $admin->password)) {
+                        $authenticated = true;
+                    }
+                } catch (\Exception $e) {
+                    // Ignore exception if the hash format is invalid
+                }
+            }
+        }
+
+        if ($authenticated) {
             Session::put('alogin', $username);
             Session::put('id', $admin->id);
 
@@ -59,6 +78,18 @@ class AdminController extends Controller
         if (!Session::get('alogin')) return redirect('/admin/login');
         $users = DB::table('users')->get();
         return view('admin.manage-users', compact('users'));
+    }
+
+    public function destroyUser($id)
+    {
+        if (!Session::get('alogin')) return redirect('/admin/login');
+        
+        DB::table('users')->where('id', $id)->delete();
+        
+        // Optionally delete their complaints as well
+        // DB::table('tblcomplaints')->where('userId', $id)->delete();
+        
+        return redirect('/admin/manage-users')->with('msg', 'User has been successfully deleted!');
     }
 
     public function userLogs()

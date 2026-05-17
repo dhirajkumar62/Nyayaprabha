@@ -14,9 +14,11 @@ Route::get('/', function () {
 Route::get('/users/login', [UserController::class, 'showLoginForm'])->name('users.login');
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/users/forgot-password', [UserController::class, 'forgotPassword']);
+Route::post('/users/verify-otp', [UserController::class, 'verifyOtp']);
 
 Route::get('/users/register', [UserController::class, 'showRegistrationForm'])->name('users.register');
 Route::post('/users/register', [UserController::class, 'register']);
+Route::post('/users/verify-registration-otp', [UserController::class, 'verifyRegistrationOtp']);
 Route::post('/users/check-availability', [UserController::class, 'checkAvailability']);
 
 // User routes
@@ -26,6 +28,12 @@ Route::post('/users/profile', [UserController::class, 'updateProfile']);
 Route::get('/users/change-password', [UserController::class, 'changePasswordForm'])->name('users.change-password');
 Route::post('/users/change-password', [UserController::class, 'updatePassword']);
 Route::get('/users/helplines', [UserController::class, 'helplines'])->name('users.helplines');
+// Emergency Contacts
+Route::get('/users/emergency-contacts', [App\Http\Controllers\EmergencyContactController::class, 'index']);
+Route::post('/users/emergency-contacts', [App\Http\Controllers\EmergencyContactController::class, 'store']);
+Route::delete('/users/emergency-contacts/{id}', [App\Http\Controllers\EmergencyContactController::class, 'destroy']);
+// SOS Trigger
+Route::post('/users/sos/trigger', [App\Http\Controllers\SosController::class, 'trigger']);
 Route::get('/users/register-complaint', [ComplaintController::class, 'create'])->name('users.register-complaint');
 Route::post('/users/register-complaint', [ComplaintController::class, 'store']);
 Route::post('/users/getsubcat', [ComplaintController::class, 'getSubcategory']);
@@ -41,6 +49,7 @@ Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.log
 
 // Admin Users & Helplines
 Route::get('/admin/manage-users', [AdminController::class, 'manageUsers'])->name('admin.manage-users');
+Route::get('/admin/users/delete/{id}', [AdminController::class, 'destroyUser']);
 Route::get('/admin/user-logs', [AdminController::class, 'userLogs'])->name('admin.user-logs');
 Route::get('/admin/helplines', [AdminController::class, 'helplines'])->name('admin.helplines');
 Route::post('/admin/helplines', [AdminController::class, 'storeHelpline']);
