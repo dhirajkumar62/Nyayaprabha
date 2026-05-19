@@ -25,6 +25,7 @@ Route::post('/users/check-availability', [UserController::class, 'checkAvailabil
 Route::get('/users/dashboard', [UserController::class, 'dashboard'])->name('users.dashboard');
 Route::get('/users/profile', [UserController::class, 'profile'])->name('users.profile');
 Route::post('/users/profile', [UserController::class, 'updateProfile']);
+Route::delete('/users/profile/gallery/{id}', [UserController::class, 'deleteGalleryImage'])->name('users.profile.gallery.delete');
 Route::get('/users/change-password', [UserController::class, 'changePasswordForm'])->name('users.change-password');
 Route::post('/users/change-password', [UserController::class, 'updatePassword']);
 Route::get('/users/helplines', [UserController::class, 'helplines'])->name('users.helplines');

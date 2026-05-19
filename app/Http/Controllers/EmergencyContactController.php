@@ -9,7 +9,8 @@ class EmergencyContactController extends Controller
     public function index()
     {
         $userId = \Illuminate\Support\Facades\Session::get('id');
-        if (!$userId) return redirect('/users/login');
+        $userLogin = \Illuminate\Support\Facades\Session::get('login');
+        if (!$userId || !$userLogin) return redirect('/users/login');
 
         $emergencyContacts = \App\Models\EmergencyContact::where('user_id', $userId)->get();
         return view('users.emergency-contacts', compact('emergencyContacts'));
@@ -18,7 +19,8 @@ class EmergencyContactController extends Controller
     public function store(Request $request)
     {
         $userId = \Illuminate\Support\Facades\Session::get('id');
-        if (!$userId) return redirect('/users/login');
+        $userLogin = \Illuminate\Support\Facades\Session::get('login');
+        if (!$userId || !$userLogin) return redirect('/users/login');
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -45,7 +47,8 @@ class EmergencyContactController extends Controller
     public function destroy($id)
     {
         $userId = \Illuminate\Support\Facades\Session::get('id');
-        if (!$userId) return redirect('/users/login');
+        $userLogin = \Illuminate\Support\Facades\Session::get('login');
+        if (!$userId || !$userLogin) return redirect('/users/login');
 
         $contact = \App\Models\EmergencyContact::where('id', $id)->where('user_id', $userId)->first();
         if ($contact) {

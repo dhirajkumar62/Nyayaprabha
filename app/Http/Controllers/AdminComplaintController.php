@@ -78,7 +78,23 @@ class AdminComplaintController extends Controller
         DB::table('tblcomplaints')
             ->where('complaintNumber', $id)
             ->update(['status' => $status]);
+            
+        // Fetch complaint details to send email
+        $complaint = DB::table('tblcomplaints')
+            ->select('tblcomplaints.*', 'users.fullName as name', 'users.userEmail as email')
+            ->join('users', 'users.id', '=', 'tblcomplaints.userId')
+            ->where('tblcomplaints.complaintNumber', $id)
+            ->first();
 
-        return redirect()->back()->with('msg', 'Complaint details updated successfully!');
+        if ($complaint && $complaint->email) {
+            try {
+                \Illuminate\Support\Facades\Mail::to($complaint->email)->send(new \App\Mail\StatusUpdateMail((array)$complaint, $status, $remark));
+            } catch (\Exception $e) {
+                // Log error or ignore if email fails but status is updated
+                \Illuminate\Support\Facades\Log::error('Failed to send status update email: ' . $e->getMessage());
+            }
+        }
+
+        return redirect()->back()->with('msg', 'Complaint details updated and user notified successfully!');
     }
 }

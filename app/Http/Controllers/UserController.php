@@ -234,8 +234,9 @@ class UserController extends Controller
         $user = DB::table('users')->where('id', $userId)->first();
         $states = DB::table('state')->get();
         $emergencyContacts = \App\Models\EmergencyContact::where('user_id', $userId)->get();
+        $galleryImages = \App\Models\UserGallery::where('user_id', $userId)->get();
 
-        return view('users.profile', compact('user', 'states', 'emergencyContacts'));
+        return view('users.profile', compact('user', 'states', 'emergencyContacts', 'galleryImages'));
     }
 
     public function updateProfile(Request $request)
@@ -243,7 +244,7 @@ class UserController extends Controller
         $userId = Session::get('id');
         if (!$userId) return redirect('/users/login');
         
-        DB::table('users')->where('id', $userId)->update([
+        $updateData = [
             'fullName' => $request->input('fullname') ?? '',
             'contactNo' => intval($request->input('contactno')),
             'address' => $request->input('address') ?? '',
@@ -251,9 +252,46 @@ class UserController extends Controller
             'country' => $request->input('country') ?? '',
             'pincode' => intval($request->input('pincode')),
             'updationDate' => now()
-        ]);
+        ];
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('profiles', $filename, 'public');
+            $updateData['userImage'] = 'storage/profiles/' . $filename;
+        }
+
+        DB::table('users')->where('id', $userId)->update($updateData);
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $file) {
+                $filename = time() . '_' . uniqid() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('gallery', $filename, 'public');
+                
+                \App\Models\UserGallery::create([
+                    'user_id' => $userId,
+                    'image_path' => 'storage/gallery/' . $filename
+                ]);
+            }
+        }
 
         return redirect()->back()->with('successmsg', 'Profile Updated Successfully!');
+    }
+
+    public function deleteGalleryImage($id)
+    {
+        $userId = Session::get('id');
+        if (!$userId) return response()->json(['success' => false, 'message' => 'Unauthorized'], 401);
+
+        $image = \App\Models\UserGallery::where('id', $id)->where('user_id', $userId)->first();
+        if ($image) {
+            $path = str_replace('storage/', '', $image->image_path);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($path);
+            $image->delete();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Image not found'], 404);
     }
 
     public function changePasswordForm()

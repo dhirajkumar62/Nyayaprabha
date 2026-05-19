@@ -1,7 +1,12 @@
 <div class="sidebar-menu-wrapper" style="padding: 24px 0;">
+<?php $userRecord = \Illuminate\Support\Facades\DB::table('users')->where('id', \Illuminate\Support\Facades\Session::get('id'))->first(); ?>
     <div class="user-profile" style="text-align: center; margin-bottom: 30px; padding: 0 24px;">
-        <img src="https://w7.pngwing.com/pngs/4/736/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png" width="80" style="border-radius: 50%; border: 3px solid var(--primary-light); margin-bottom: 16px;">
-        <h4 style="font-size: 1.1rem; color: var(--text-main); font-weight: 700;">{{ \Illuminate\Support\Facades\DB::table('users')->where('id', \Illuminate\Support\Facades\Session::get('id'))->value('fullName') }}</h4>
+        @if($userRecord && $userRecord->userImage)
+            <img src="{{ asset($userRecord->userImage) }}" width="80" height="80" style="border-radius: 50%; border: 3px solid var(--primary-light); margin-bottom: 16px; object-fit: cover;">
+        @else
+            <img src="https://w7.pngwing.com/pngs/4/736/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png" width="80" height="80" style="border-radius: 50%; border: 3px solid var(--primary-light); margin-bottom: 16px; object-fit: cover;">
+        @endif
+        <h4 style="font-size: 1.1rem; color: var(--text-main); font-weight: 700;">{{ $userRecord ? $userRecord->fullName : 'User' }}</h4>
         <p style="font-size: 0.875rem; color: var(--text-muted);">User Account</p>
     </div>
 

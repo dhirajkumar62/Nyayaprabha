@@ -9,9 +9,14 @@ class SosController extends Controller
     public function trigger(Request $request)
     {
         $userId = \Illuminate\Support\Facades\Session::get('id');
-        if (!$userId) return redirect('/users/login');
+        $userLogin = \Illuminate\Support\Facades\Session::get('login');
+        if (!$userId || !$userLogin) return redirect('/users/login');
 
         $user = \Illuminate\Support\Facades\DB::table('users')->where('id', $userId)->first();
+        if (!$user) {
+            \Illuminate\Support\Facades\Session::forget(['login', 'id']);
+            return redirect('/users/login')->with('errormsg', 'Session invalid. Please log in again.');
+        }
         $contacts = \App\Models\EmergencyContact::where('user_id', $userId)->get();
 
         if ($contacts->isEmpty()) {
@@ -22,6 +27,16 @@ class SosController extends Controller
         if ($request->filled('latitude') && $request->filled('longitude')) {
             $locationLink = "https://maps.google.com/?q=" . $request->latitude . "," . $request->longitude;
         }
+
+        // Log SOS alert in database
+        \Illuminate\Support\Facades\DB::table('sos_alerts')->insert([
+            'user_id' => $userId,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'status' => 'active',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         $emailsSent = 0;
         $smsSent = 0;
