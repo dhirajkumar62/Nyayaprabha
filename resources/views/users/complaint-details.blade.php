@@ -276,6 +276,18 @@
                                         <span class="meta-label"><i class="fa-solid fa-location-dot"></i> State</span>
                                         <span class="meta-value">{{ $complaint->state }}</span>
                                     </li>
+                                    @if($complaint->campus)
+                                    <li>
+                                        <span class="meta-label"><i class="fa-solid fa-building-columns"></i> Campus</span>
+                                        <span class="meta-value">{{ $complaint->campus }}</span>
+                                    </li>
+                                    @endif
+                                    @if($complaint->block_number)
+                                    <li>
+                                        <span class="meta-label"><i class="fa-solid fa-building"></i> Block No.</span>
+                                        <span class="meta-value">{{ $complaint->block_number }}</span>
+                                    </li>
+                                    @endif
                                     <li>
                                         <span class="meta-label"><i class="fa-solid fa-flag"></i> Priority</span>
                                         <span class="status-badge priority-high" style="padding: 4px 10px; font-size: 0.7rem;">High</span>

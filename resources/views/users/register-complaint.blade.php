@@ -54,10 +54,36 @@
     <script>
     $(document).ready(function() {
         $('.select2').select2({
-            placeholder: "Select your State",
+            placeholder: "Select an option",
             allowClear: true
         });
     });
+    
+    const campusData = {
+        'Punjab': ['LPU Jalandhar', 'Chandigarh University', 'Thapar University', 'Chitkara University'],
+        'Delhi': ['North Campus', 'South Campus', 'Main Campus'],
+        'Maharashtra': ['Mumbai Campus', 'Pune Campus', 'Nagpur Campus'],
+        'Karnataka': ['Bangalore Campus', 'Mysore Campus', 'Mangalore Campus'],
+        'Tamil Nadu': ['Chennai Campus', 'Coimbatore Campus', 'Vellore Campus']
+    };
+
+    function loadCampuses(stateName) {
+        let campusSelect = $("#campus");
+        let campusContainer = $("#campus-container");
+        
+        campusSelect.empty();
+        campusSelect.append('<option value="">Select Campus</option>');
+        
+        if (stateName) {
+            campusContainer.show();
+            let campuses = campusData[stateName] || ['Main Campus', 'City Campus', 'Regional Campus'];
+            campuses.forEach(function(campus) {
+                campusSelect.append('<option value="' + campus + '">' + campus + '</option>');
+            });
+        } else {
+            campusContainer.hide();
+        }
+    }
     
     function getCat(val) {
         $.ajax({
@@ -133,12 +159,24 @@
 
                             <div class="form-group">
                                 <label class="form-label">State</label>
-                                <select name="state" class="form-control select2" required>
+                                <select name="state" id="state" class="form-control select2" onChange="loadCampuses(this.value);" required>
                                     <option value="">Select State</option>
                                     @foreach($states as $rw)
                                         <option value="{{ $rw->stateName }}">{{ $rw->stateName }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="form-group" id="campus-container" style="display: none;">
+                                <label class="form-label">Campus</label>
+                                <select name="campus" id="campus" class="form-control select2">
+                                    <option value="">Select Campus</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">Block Number</label>
+                                <input type="text" name="block_number" class="form-control" placeholder="Enter Block Number (e.g. Block A, Room 101)">
                             </div>
 
                             <div class="form-group full-width">

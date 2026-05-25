@@ -71,6 +71,8 @@ The system is developed using Laravel and modern web technologies to provide a s
 
 ## About Laravel
 
+This repository contains the Nyayaprabha complaint management and emergency alert application built on Laravel. For project-specific documentation, see [DOCUMENTATION.md](./DOCUMENTATION.md).
+
 Laravel is a web application framework with expressive, elegant syntax. Laravel simplifies common development tasks such as routing, authentication, caching, and database management, making web application development faster and more efficient.
 
 ### Laravel Features

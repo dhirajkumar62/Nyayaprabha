@@ -36,6 +36,8 @@ class ComplaintController extends Controller
             'subcategory' => $request->input('subcategory') ?? '',
             'complaintType' => $request->input('complaintype') ?? '',
             'state' => $request->input('state') ?? '',
+            'campus' => $request->input('campus') ?? '',
+            'block_number' => $request->input('block_number') ?? '',
             'noc' => $request->input('noc') ?? '',
             'complaintDetails' => $request->input('complaindetails') ?? '',
             'complaintFile' => $compfile,
