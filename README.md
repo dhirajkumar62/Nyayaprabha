@@ -1,58 +1,168 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+  </a>
+</p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/laravel/framework/actions">
+<img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status">
+</a>
+
+<a href="https://packagist.org/packages/laravel/framework">
+<img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads">
+</a>
+
+<a href="https://packagist.org/packages/laravel/framework">
+<img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version">
+</a>
+
+<a href="https://packagist.org/packages/laravel/framework">
+<img src="https://img.shields.io/packagist/l/laravel/framework" alt="License">
+</a>
 </p>
+
+# Women Safety Monitoring System
+
+## About Project
+
+Ensuring women's safety on campuses remains a significant challenge. This project focuses on developing a community-based reporting and monitoring system that enables students to report safety concerns, suspicious activities, and incidents in real time. The platform helps authorities monitor complaints efficiently, improve campus security, and create a safer environment for women through transparent communication and incident tracking.
+
+The system is developed using Laravel and modern web technologies to provide a secure, scalable, and user-friendly experience.
+
+---
+
+## Features
+
+- User Authentication and Authorization
+- Complaint Registration System
+- State, Campus, and Block Selection
+- Real-Time Safety Incident Reporting
+- Admin Dashboard for Monitoring Complaints
+- Complaint Status Tracking
+- Secure Database Management
+- Responsive User Interface
+- Community-Based Reporting Mechanism
+
+---
+
+## Technologies Used
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+
+### Backend
+- PHP
+- Laravel Framework
+
+### Database
+- MySQL
+
+### Tools & Platforms
+- Git
+- GitHub
+- VS Code
+- XAMPP
+
+---
 
 ## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel is a web application framework with expressive, elegant syntax. Laravel simplifies common development tasks such as routing, authentication, caching, and database management, making web application development faster and more efficient.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Laravel Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Simple and Fast Routing Engine
+- Powerful Dependency Injection
+- Expressive Database ORM (Eloquent)
+- Database Migration Support
+- Secure Authentication System
+- Queue and Background Job Processing
+- Event Broadcasting
 
-## Learning Laravel
+Learn more about Laravel from the official documentation:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- https://laravel.com/docs
+- https://laracasts.com
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Installation
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Clone the Repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/your-username/project-name.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Navigate to Project Folder
+
+```bash
+cd project-name
+```
+
+### Install Dependencies
+
+```bash
+composer install
+```
+
+### Copy Environment File
+
+```bash
+cp .env.example .env
+```
+
+### Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### Configure Database
+
+Update your `.env` file with database credentials.
+
+```env
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### Run Migrations
+
+```bash
+php artisan migrate
+```
+
+### Start Development Server
+
+```bash
+php artisan serve
+```
+
+---
+
+## Future Enhancements
+
+- Emergency SOS Alert System
+- Live Location Tracking
+- Anonymous Complaint Reporting
+- Mobile Application Support
+- AI-Based Threat Detection
+- Email and SMS Notifications
+
+---
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions are welcome. Feel free to fork this repository and submit pull requests for improvements.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and available under the MIT License.
